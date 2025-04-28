@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lobby Homepage</title>
+</head>
+<body>
+  <h1>Welcome!</h1>
+
+  <button id="createLobbyBtn">Create New Lobby</button>
+
+  <form id="joinForm" style="margin-top: 20px;">
+    <input type="text" id="lobbyId" placeholder="Enter Lobby ID" required>
+    <button type="submit">Join Lobby</button>
+  </form>
+
+  <script>
+    const createBtn = document.getElementById('createLobbyBtn');
+    const form = document.getElementById('joinForm');
+
+    createBtn.addEventListener('click', async () => {
+      const res = await fetch('/create-lobby');
+      const data = await res.json();
+      window.location.href = `/lobby/${data.lobbyId}`;
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const lobbyId = document.getElementById('lobbyId').value.trim().toUpperCase();
+      window.location.href = `/lobby/${lobbyId}`;
+    });
+  </script>
+</body>
+</html>
