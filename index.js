@@ -19,16 +19,17 @@ function checkKey(req, res, next) {
 
 app.use(cors());
 app.use(express.json());
-app.use('/', checkKey);
+app.use('/v1', checkKey);
 
 app.get('/', (req, res) => {
-  res.send('Hello from your CORS-enabled Oracle Express Server!');
+  res.send('unprotected resources');
+});
+
+app.get('/v1/', (req, res) => {
+  res.send('Protected resources');
 });
 
 
-app.get('/hello', (req, res) => {
-  res.json({ message: 'Hello World, with CORS!' });
-});
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
