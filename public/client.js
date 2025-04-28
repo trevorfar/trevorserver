@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io("https://trevorserver.trevorfarias.com");
 
 const lobbyId = window.location.pathname.split('/').pop();
 let playerNumber = null;
